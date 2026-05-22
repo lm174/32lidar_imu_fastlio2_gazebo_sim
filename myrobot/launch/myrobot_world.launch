@@ -1,0 +1,20 @@
+<launch>
+<!--参数设置模块-->
+  <arg name="model" default="$(optenv TURTLEBOT3_MODEL waffle)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="world_name" default="$(find myrobot)/world/myrobot_world.world"/>
+<!--设置模型路径-->
+  <env name="GAZEBO_MODEL_PATH" value="$(find myrobot)/world:$(optenv GAZEBO_MODEL_PATH)"/>
+<!--启动空世界并加载我自己创建的世界-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+<!-- 加载机器人参数-->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+<!--加载机器人模型-->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x 0 -y 0 -z 0 -param robot_description" />
+</launch>
