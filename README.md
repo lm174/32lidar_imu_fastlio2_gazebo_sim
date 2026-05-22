@@ -46,6 +46,8 @@ rosrun myrobot moving_cylinder.py
 ```
 
 启动成功可以看到Gazebo出现一个直线往返运动的红色圆柱体障碍物，参数可以在moving_cylinder.py中修改
+<img width="2559" height="1209" alt="e6908578e9d9968fb18f53685fba88bc" src="https://github.com/user-attachments/assets/823d63b8-da2c-4d95-974c-c54f1d300b92" />
+
 
 ### 3、启动键盘控制
 
